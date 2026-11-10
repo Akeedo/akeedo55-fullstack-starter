@@ -1,0 +1,63 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using employee.api.Models;
+
+namespace employee.api.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EmployeeController : Controller
+    {
+        public readonly EmployeeDbContext _context;
+        public EmployeeController(EmployeeDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet]
+        [Route("GetEmployee")]
+        public IActionResult getAllEmployee()
+        {
+            var list = _context.EmployeeModels.ToList();
+            return Ok(list);
+        }
+
+        [HttpPost("CreateNewEmployee")]
+        public IActionResult addEmployee(EmployeeModel obj)
+        {
+            _context.EmployeeModels.Add(obj);
+            _context.SaveChanges();
+            return Ok(obj);
+        }
+
+        [HttpPut("UpdateEmployee/{id}")]
+        public IActionResult updateEmployee(int id, EmployeeModel obj)
+        {
+          var existingRecord = _context.EmployeeModels.FirstOrDefault(e => e.empId == id);
+            if (existingRecord == null)
+            {
+                return NotFound();
+            }
+            existingRecord.empName = obj.empName;
+            existingRecord.empMobile = obj.empMobile;
+            existingRecord.empEmail = obj.empEmail;
+            existingRecord.city = obj.city;
+            existingRecord.state = obj.state;
+            existingRecord.address = obj.address;
+            _context.SaveChanges();
+            return Ok(existingRecord);
+        }
+
+        [HttpDelete("deleteEmployee")]
+        public IActionResult deleteEmployee(int id)
+        {
+            var existingRecord = _context.EmployeeModels.FirstOrDefault(e => e.empId == id);
+            if (existingRecord == null)
+            {
+                return NotFound();
+            }
+            _context.EmployeeModels.Remove(existingRecord);
+            _context.SaveChanges();
+            return Ok(existingRecord);
+        }
+    }
+}

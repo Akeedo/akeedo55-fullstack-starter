@@ -1,0 +1,24 @@
+$kind: http-request
+url: https://localhost:44393/api/Employee/UpdateEmployee/1
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"empName\": \"John Smith\",\r
+
+    \    \"empMobile\": \"1234567890\",\r
+
+    \    \"empEmail\": \"johnsmith@example.com\",\r
+
+    \    \"city\": \"Dhaka\",\r
+
+    \    \"state\": \"Dhaka Division\",\r
+
+    \    \"address\": \"Dhanmondi, Dhaka\"\r
+
+    }"
+order: 2000

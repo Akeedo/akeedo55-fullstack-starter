@@ -1,0 +1,24 @@
+$kind: http-request
+url: https://localhost:44393/api/Employee/CreateNewEmployee
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"empName\": \"John Doe\",\r
+
+    \    \"empMobile\": \"01712345678\",\r
+
+    \    \"empEmail\": \"john@example.com\",\r
+
+    \    \"city\": \"Dhaka\",\r
+
+    \    \"state\": \"Dhaka Division\",\r
+
+    \    \"address\": \"House 10, Road 5, Dhanmondi, Dhaka\"\r
+
+    }"
+order: 1528
